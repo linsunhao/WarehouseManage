@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.warehousemanage.mapper.UserMapper">
+
+    <resultMap id="userAndMenu" type="User">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="no" property="no"></result>
+        <result column="age" property="age"></result>
+        <result column="gender" property="gender"></result>
+        <result column="phone" property="phone"></result>
+        <result column="role_id" property="roleId"></result>
+        <result column="isValid" property="isValid"></result>
+        <collection property="menus" ofType="menu">
+            <id column="mid" property="mid"></id>
+            <result column="menuCode" property="menuCode"></result>
+            <result column="menuName" property="menuName"></result>
+            <result column="menuLevel" property="menuLevel"></result>
+            <result column="menuParentCode" property="menuParentCode"></result>
+            <result column="menuClick" property="menuClick"></result>
+            <result column="menuRight" property="menuRight"></result>
+            <result column="menuComponent" property="menuComponent"></result>
+            <result column="menuicon" property="menuicon"></result>
+        </collection>
+    </resultMap>
+
+    <select id="login" resultMap="userAndMenu">
+        select * from user left join menu on menu.menuRight like concat('%',user.role_id,'%') where user.username = #{user.username} and user.password = #{user.password}
+    </select>
+</mapper>

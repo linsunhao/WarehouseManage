@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.warehousemanage.mapper.GoodsMapper">
+
+
+    <select id="Page" resultType="Goods">
+        SELECT goods.*,goodstype.`name` as 'goodstypeName',`storage`.`name` as 'storageName' from goods join `goodstype` on goods.goodsType = goodstype.id JOIN `storage` on goods.`storage` = `storage`.id ${ew.customSqlsegment}
+    </select>
+
+</mapper>

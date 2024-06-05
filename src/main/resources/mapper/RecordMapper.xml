@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.warehousemanage.mapper.RecordMapper">
+
+
+
+    <select id="Page" resultType="Record">
+        SELECT record.*,(SELECT username from user where user.id = record.user_id) as 'userName',(SELECT username from user where user.id = record.admin_id)as 'adminName',goods.`name` as 'goodsName', goodstype.`name` as 'goodsType' ,`storage`.`name` as 'storageName' from record ,goods , goodstype ,`storage` ${ew.customSqlsegment} order by record.id
+    </select>
+</mapper>
